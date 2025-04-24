@@ -12,6 +12,11 @@ trigger:
   event:
     - cron
     - push
+    
+matrix:
+  IMAGE_VERSION:
+    - "2.7.0"
+    - "2.9.5"
 
 steps:
   - name: build-and-push
@@ -28,8 +33,8 @@ steps:
     commands:
       - image_name=$${REGISTRY}/sighup/trivy-adapter-photon-offline
       - docker login $${REGISTRY} -u $${REGISTRY_USER} -p $${REGISTRY_PASSWORD}
-      - docker build --pull --no-cache -t $${image_name}:v2.7.0 .
-      - docker push $${image_name}:v2.7.0
+      - docker build --pull --no-cache -t $${image_name}:${IMAGE_VERSION} .
+      - docker push $${image_name}:${IMAGE_VERSION}
 
 volumes:
   - name: dockersock
