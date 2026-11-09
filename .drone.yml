@@ -6,6 +6,9 @@ kind: pipeline
 type: docker
 name: release
 
+node:
+  performance: low
+
 trigger:
   branch:
     - main
